@@ -25,7 +25,7 @@ version: "3.1"
         MYSQL_ROOT_PASSWORD: secret
 
     assetgrid:
-      image: assetgrid/assetgrid:0.1.0
+      image: assetgrid/assetgrid
       container_name: assetgrid
       links:
         - db:db
@@ -39,7 +39,7 @@ Example docker run commands:
 
 ```bash
 docker run -v ./mariadb:/var/lib/mysql --env "MYSQL_ROOT_PASSWORD=secret" --name db mariadb:latest
-docker run --link db --env "CONNECTION_STRING='Server=db;Database=assetgrid;Uid=assetgrid;Pwd=secret'" -p 80:8080 --name assetgrid assetgrid/assetgrid:0.1.0
+docker run --link db --env "CONNECTION_STRING='Server=db;Database=assetgrid;Uid=assetgrid;Pwd=secret'" -p 80:8080 --name assetgrid assetgrid/assetgrid
 ```
 
 ### Custom installation
