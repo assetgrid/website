@@ -1,0 +1,162 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab">
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header>
+			<div class="wrapper">
+				<a class="header-logo" href="/">
+					<img src="/logo.svg"/>
+				</a>
+				<div class="buttons">
+					<a class="button is-primary" href="/get-started">Get started</a>
+					<a class="button" href="/reference">Reference</a>
+				</div>
+			</div>
+		</header>
+		<slot />
+		<footer>
+			<div class="copyright">
+				<div class="wrapper">
+					<span>© 2022-<span id="current-year"></span> Assetgrid</span>
+					<span>Made with ❤️ in Copenhagen</span>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+<style>
+	:root {
+		--color-primary: #4db09b;
+		--color-dark: rgb(6, 30, 47);
+		--font-family-title: "Roboto Slab", Arial, Helvetica, sans-serif;
+		--font-family-body: "Open Sans", Arial, Helvetica, sans-serif;
+	}
+
+	html {
+		font-family: system-ui, sans-serif;
+		font-size: 1rem;
+	}
+
+	body {
+		margin: 0;
+	}
+
+	footer, header {
+		background-color: #01090f;
+		color: white;
+	}
+	header .wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.header-logo > img {
+		height: 2rem;
+		display: block;
+	}
+	header .wrapper {
+		padding: 1rem 2rem;
+	}
+	header .button {
+		display: block;
+		margin-right: 0.5rem;
+	}
+	header .button:last-child {
+		margin-right: 0;
+	}
+	header .buttons {
+		display: flex;
+		margin: 0.5rem;
+	}
+
+	footer .copyright .wrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	@media screen and (max-width: 500px) {
+		header .wrapper {
+			flex-direction: column;
+		}
+	}
+</style>
+
+<style is:global>
+	html * {
+		box-sizing: border-box;
+	}
+
+	h1 {
+		font-size: 3rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
+	h1, h2, h3 {
+		font-family: var(--font-family-title);
+	}
+
+	body {
+		font-family: var(--font-family-body);
+	}
+
+	.astro-code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+
+	.wrapper {
+		max-width: 80rem;
+		margin: auto;
+		padding: 1rem 2rem;
+	}
+	.wrapper.narrow {
+		max-width: 40rem;
+	}
+
+	.button {
+		padding: 0.5rem 1rem;
+		background-color: transparent;
+		border: 1px solid white;
+		border-radius: 0.25rem;
+		color: white;
+		text-decoration: none;
+		transition: color 0.2s, background-color 0.2s;
+	}
+	.button:hover {
+		background-color: white;
+		color: var(--color-dark);
+	}
+	.button.is-primary {
+		background-color: var(--color-primary);
+		border: 0;
+	}
+	.button.is-primary:hover {
+		background-color: #7bc9b8;
+		color: white;
+	}
+</style>
+
+<script>
+	window.addEventListener("load", () => {
+		document.getElementById("current-year")!.innerHTML = (new Date()).getFullYear().toString();
+	});
+</script>

@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Assetgrid.app">
+	<main>
+		<section class="landing">
+			<div class="wrapper grid-parent">
+				<div class="grid"></div>
+				<div class="title">
+					<h1>Control your personal finances</h1>
+					<h2>See the big picture with Assetgrid</h2>
+					<div class="buttons">
+						<a href="/get-started" class="button is-primary">Install now</a>
+						<a href="/reference" class="button">Reference</a>
+					</div>
+				</div>
+				<div class="image">
+					<img src="happy-money.svg" />
+					<a href="http://www.freepik.com" class="image-attribution">Image by pch.vector / Freepik</a>
+				</div>
+			</div>
+		</section>
+		<div class="dark-divider"></div>
+		<section class="about">
+			<div class="wrapper narrow">
+				<h2>What is Assetgrid?</h2>
+				<p>Assetgrid allows you to collect your personal finances in a single place.</p>
+				<p>It does not force you into any specific way of organizing your finances. You shouldn't adapt your economy to the software you use, Assetgrid will adapt to you.</p>
+				<p>There's a fine balance between software being powerful and software being easy and intuitive to use.
+					To accomplish this Assetgrid is configurable. It may take some time the first time you start up Assetgrid to
+					configure it according to how you organize your economy, but you are rewarded for your efforts with a program that is tailored exactly to your needs.</p>
+				<p>Most importantly, Assetgrid is open source. This means that you run it on your own server and your data never leaves your control.</p>
+			</div>
+			<div class="horizontal-columns"></div>
+		</section>
+		<div class="dark-divider"></div>
+		<section class="features">
+			<h2>Features</h2>
+			<div class="feature">
+				<div class="text">
+					<h3>Overview</h3>
+					<p>See how your net worth develops over time, what you spend your money on, your sources of income or any other statistic you may want to know about your finances.</p>
+				</div>
+				<div class="image">
+					<img src="screenshots/overview.png" />
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="text">
+					<h3>Powerful CSV importer</h3>
+					<p>Most banks allow exporting your bank statement as a CSV file. Assetgrid has a powerful import tool, which will help you no matter what archaic standard your bank organizes the file in.</p>
+				</div>
+				<div class="image">
+					<img src="screenshots/csv_import.png" />
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="text">
+					<h3>Categorize your transactions</h3>
+					<p>Understand how you spend or earn your money by organizing it into categories.</p>
+				</div>
+				<div class="image">
+					<img src="screenshots/categories.png" />
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="text">
+					<h3>Split transactions</h3>
+					<p>Transactions with multiple lines are natively supported by Assetgrid, so you can enter in receipts or invoices without losing any information.</p>
+				</div>
+				<div class="image">
+					<img src="screenshots/split_transaction.png" />
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="text">
+					<h3>Search</h3>
+					<p>At the core of Assetgrid is our powerful search engine that let's you query your transaction in any way imaginable.</p>
+				</div>
+				<div class="image">
+					<img src="screenshots/search.png" />
+				</div>
+			</div>
+		</section>
+		<section class="upcoming">
+			<div class="wrapper narrow">
+				<h2>Upcoming features</h2>
+				<p>Assetgrid is still in it's infancy, so it's basic at the moment. But we have a lot planned for the future.</p>
+				<p>If you want to help us implement these features faster, please donate on Github (USD) or Patreon (EUR).</p>
+
+				<ul>
+					<li>Currencies 💱</li>
+					<li>Tags 🏷️</li>
+					<li>Store import profiles and transaction filters for future use 💾</li>
+					<li>Automation 🤖</li>
+					<li>Budgets 💰</li>
+					<li>Future expenses 📨</li>
+					<li>Custom transaction metadata ⚙️</li>
+					<li>Custom reports📊</li>
+					<li>Automatic bank imports 🏦</li>
+					<li>Stocks and other investments 🚀</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+.wrapper {
+	padding-top: 5rem !important;
+	padding-bottom: 5rem !important;
+}
+
+/* Landing section */
+.landing {
+	overflow: hidden;
+}
+.landing > .wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5rem 2rem;
+}
+.landing .image {
+	max-width: 40rem;
+	margin-bottom: -5rem;
+	flex-grow: 1;
+	min-width: 20rem;
+	align-self: flex-end;
+	position: relative;
+}
+.image-attribution {
+	right: 50%;
+	transform: translateX(50%);
+	bottom: 0.5rem;
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 0.8rem;
+	position: absolute;
+}
+@media screen and (max-width: 25rem) {
+	.landing .image {
+		min-width: 0;
+	}
+}
+.landing .image img {
+	display: block;
+}
+.landing h1 {
+	color: white;
+	font-size: 3rem;
+	max-width: 30rem;
+	flex-grow: 1;
+	margin-bottom: 1rem;
+	line-height: 120%;
+}
+.landing h2 {
+	color: #648195;
+	font-size: 1.5rem;
+	margin-top: 0;
+	font-family: var(--font-family-body);
+}
+
+.grid-parent {
+	position: relative;
+}
+.grid {
+	background: var(--color-dark);
+	background-image: linear-gradient(rgba(255, 255, 255, .1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .1) 1px, transparent 1px);
+	background-size: 1em 1em;
+	transform: skewX(-10deg) scaleX(2);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+}
+.grid::after {
+	content: " ";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: linear-gradient(transparent 0%, rgb(3, 16, 26) 100%);
+	z-index: -1;
+}
+
+/* Section after landing */
+.dark-divider {
+	background: var(--color-dark);
+	padding: 2rem;
+	margin-top: -1px;
+}
+
+/* About section */
+.horizontal-columns {
+	height: 5rem;
+	background-image: url("/horizontal-columns.svg");
+	background-repeat: repeat-x;
+	background-size: auto 5rem;
+}
+.horizontal-columns.inverted {
+	transform: scaleY(-1);
+	opacity: 0.5;
+}
+
+/* Features section */
+.features {
+	padding: 5rem 2rem;
+}
+.features h2 {
+	font-size: 5rem;
+	text-align: center;
+	margin-top: 0;
+	padding-top: 2rem;
+}
+.feature {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	margin: 3rem 0;
+	flex-wrap: wrap;
+}
+.feature .text {
+	width: 30rem;
+	padding: 2rem;
+}
+.feature .text h3 {
+	font-size: 2rem;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.feature .image {
+	flex-grow: 1;
+	max-width: 30rem;
+	border: 1px solid var(--color-primary);
+	border-radius: 1rem;
+	overflow: hidden;
+}
+.feature .image img {
+	width: 100%;
+}
+.feature:nth-child(even) {
+	flex-direction: row-reverse;
+}
+
+/* Upcoming features */
+.upcoming {
+	background-color: var(--color-dark);
+	background-image: linear-gradient(transparent 0%, rgb(3, 16, 26) 100%);
+	color: white
+}
+
+</style>

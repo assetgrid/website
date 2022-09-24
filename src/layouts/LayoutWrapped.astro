@@ -1,0 +1,22 @@
+---
+export interface Props {
+	title: string;
+	frontmatter?: { title: string }
+}
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title={Astro.props.frontmatter?.title ?? Astro.props.title}>
+	<div class="wrapper">
+		<slot />
+	</div>
+</Layout>
+
+<style>
+	body {
+		background-color: #EEE;
+	}
+	.wrapper {
+		background-color: white;
+	}
+</style>
