@@ -63,3 +63,24 @@ You can use a regex to only keep parts of the raw CSV value. Regexes can also be
 {0} means the first group and will output everything matched by the regex
 
 {1}, {2}, {3}&hellip; will output the values of capture groups.
+
+#### All my transactions are positive - what happened?
+
+Some banks export one column with the account exported, a column for source and destination and finally a column for the amount that is positive or negative depending on whether the exported account is the source or destination. This creates a problem as Assetgrid will invert a transaction with a negative amount. This can be solved by making all transactions positive using the following regex: "[\\d,.]+" which will select everything expect the negative sign.
+
+Example:
+|Exported account   |Source     |Destination    |Amount |
+|---	            |---	    |---	        |---	|
+|Account A          |Account B  |Account A      |200    |
+|Account A          |Account A  |Account C      |-200   |
+
+If you use the source, destination and amount columns. The transactions will be imported as follows, which is incorrect:
+
+|Source     |Destination    |Amount |
+|---	    |---	        |---	|
+|Account B  |Account A      |200    |
+|Account C  |Account A      |200    |
+
+If you use the exported account column, you cannot also add the source or destination as it will lead to transactions with the same source and destination, which cannot be imported.
+
+The solution is to use the "[\\d,.]+" regex on the amount column, which will make it positive and thus the transactions will be correctly imported.
