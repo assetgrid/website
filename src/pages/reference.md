@@ -25,11 +25,10 @@ The "CSV data" window shows a preview of the parsed CSV file. It is this table t
 On this page you specify which information in the CSV file corresponds to which information in Assetgrid.
 
 #### Duplicate handling
-Assetgrid can prevent duplicates by storing a unique identifier for each transaction. If try to upload a transaction with an identifier which already exists on another transaction, the newly uploaded transcation will be discarded. Assetgrid provides several ways of calculating this identifier:
+Assetgrid can prevent duplicates by storing a unique identifier for each transaction. If you try to upload a transaction with an identifier which already exists on another transaction, the newly uploaded transcation will be discarded. Assetgrid provides several ways of calculating this identifier:
 
-* **Column** uses a column from the CSV file as the unique identifier. This is useful if your CSV file contains a transaction ID or another unique reference.
-* **Column and count** is similar to column, but appends the number of times this column value has appeared in the CSV file. This can be used with a date field if the order of transactions for any given date doesn't change between imports.
-* **Row number** is simply the line number in the CSV file. This can be used if you always upload a file containing all transactions in the same order.
+* **Auto** automatically calculates a unique identifier. It does this based on source account, destination account, amount, timestamp and description. The identifier is calculated at the time of import, so if you change the transaction later and reimport the original file, it will be registered as duplicate. If there are multiple transactions in the file that match on all the properties included in the auto identifier, then a number will be appended to the end for each occurence. This will correctly identify transactions as long as you always import all transactions for a given timestamp.
+* **Unique ID column** uses a column from the CSV file as the unique identifier. This is useful if your CSV file contains a transaction ID or another unique reference.
 * **Ignore duplicates** will not assign a unique identfier to your transaction, and thus not prevent duplicates on future imports.
 
 #### Timestamp
