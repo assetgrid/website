@@ -11,7 +11,9 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -103,10 +105,10 @@ const { title } = Astro.props;
 	}
 
 	h1 {
-		font-size: 3rem;
+		font-size: 2rem;
 	}
 	h2 {
-		font-size: 2rem;
+		font-size: 1.5rem;
 	}
 	h1, h2, h3 {
 		font-family: var(--font-family-title);
