@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/LayoutWrapped.astro
+layout: ../layouts/LayoutDocs.astro
 title: "Get started with Assetgrid!"
 ---
 
@@ -71,9 +71,9 @@ In assetgrid a transaction is always a positive amount of money going from the s
 
 The Assetgrid CSV importer has 3 steps. First you need to parse the raw CSV. Then you need to tell Assetgrid how to create transactions from it. Finally you have to import.
 
-You tell Assetgrid how to create transactions by telling it which columns in the CSV file correspond to which properties on the transaction. When selecting source and destination account, you not only have to tell Assetgrid which column contains information about the account, you also have to specify which property of the account it contains. This is called the identifier. You also have the option of manually selecting an account (or no account) which will then be set for all transactions in the import.
+You tell Assetgrid how to create transactions by telling it which columns in the CSV file correspond to which properties on the transaction. 
 
-You can find more information on how to import from CSV in the [reference documentation](/reference#csv-import).
+You can find more information on how to import from CSV in the [reference documentation](/reference/import/csv).
 
 ## 3. Viewing transactions
 

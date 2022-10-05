@@ -1,35 +1,7 @@
 ---
-layout: ../layouts/LayoutWrapped.astro
+layout: ../../../layouts/LayoutDocs.astro
 title: "Assetgrid | Reference documentation"
 ---
-
-# Transactions
-
-Transactions are at the core of Assetgrid. A transaction represents a positive transfer from a source account to a destination account. Transactions with negative amounts will be made positive by swapping the source and destination.
-
-## Browsing transactions
-
-There are several ways to find transactions in Assetgrid.
-
-The transactions page lists all transactions from all accounts. It has a quick search field which performs a simple search. It also supports an advanced query editor, that allows you to more precisely find the correct transactions.
-
-The account page also shows transactions for a specific account. But unlike the transaction page, you cannot reorder them or filter them. This is because the page calculates an account balance, which would be wrong if transactions were missing or the order wasn't chronological.
-
-The account page is grouped by period, which limits which transactions are shown in the table. You can use the period selector in the top menu to switch period. You can also just use the pagination for the table. When you reach the end of a period, the next and previous buttons on the table will switch from ">" to ">>" indicating that pressing it will advance the period.
-
-## Modifying transactions
-
-If you just want to make a quick modification to a transaction you can use the pencil button and open the quick editor.
-
-However, you often want to modify or delete multiple transactions at once. By using the dropdown at the top of the table, you can chose between modifying all selected transactions at once or all transactions matching the search query. The latter option allows you to do things like adding all transactions with the text "pizza place" in the description to the category "takeout".
-
-On the account page, the "modify all" button will modify all transactions for that account.
-
-## Merging transactions
-
-Some times you end up with duplicate transactions from different imports. For example if you imported all transactions on two different accounts and they had a transaction between them. Simply deleting one transaction, has the problem that the next import will recreate it.
-
-Instead you can merge the transactions. This will still delete one transaction, but it will transfer the unique identifier from the deleted transaction to the one remaining, so during the next import, it will not be recreated.
 
 # CSV Import
 
@@ -51,7 +23,7 @@ The "CSV data" window shows a preview of the parsed CSV file. It is this table t
 On this page you specify which information in the CSV file corresponds to which information in Assetgrid.
 
 ### Duplicate handling
-Assetgrid can prevent duplicates by storing a unique identifier for each transaction. If you try to upload a transaction with an identifier which already exists on another transaction, the newly uploaded transcation will be discarded. Assetgrid provides several ways of calculating this identifier:
+Assetgrid can prevent duplicates by storing a unique identifier for each transaction. If you try to upload a transaction with an identifier which already exists on another transaction, the newly uploaded transcation will be discarded. You can store multiple identifiers for each transaction, for examlpe if the same transaction exists on exports from multiple accounts. Assetgrid provides several ways of calculating this identifier:
 
 * **Auto** automatically calculates a unique identifier. It does this based on source account, destination account, amount and timestamp. The identifier is calculated at the time of import, so if you change the transaction later and reimport the original file, it will be registered as duplicate. If there are multiple transactions in the file that match on all the properties included in the auto identifier, then a number will be appended to the end for each occurence. This will correctly identify transactions as long as you always import all transactions for a given timestamp.
 * **Unique ID column** uses a column from the CSV file as the unique identifier. This is useful if your CSV file contains a transaction ID or another unique reference.
@@ -76,7 +48,7 @@ You can put text between single quotes ' ' to make the date parser ignore it.
 ### Accounts
 All transactions in Assetgrid are a positive amount transfered from the source account to the destination account. Entering a negative amount will make Assetgrid swap the source and destination. A transaction in Assetgrid must have a source or destination account, but only one is required. If you want to keep track of transfers to accounts that you don't own, we recommend that you still create them as Accounts within Assetgrid, but uncheck the "include in net worth" option.
 
-When determining how a transaction should be linked to an account based on the CSV file, you need to tell Assetgrid which part of the account the CSV file references. This is the "identifier" and can be the account id, name, account number etc. You must then select which column in the CSV file to look for that identifier in. If you reference an account that is not found Assetgrid will show a warning. Hovering this warning allows you to create the missing account.
+You select which column in the CSV represents the account. Assetgrid does not care what information about the account the column contains. It can be the account name, account number or something else entirely. As long as it does not change between exports. When selecting a CSV column for accounts, Assetgrid will ask you to assign all values to accounts. By doing this, Assetgrid adds this value as an identifier to the account and will remember it for future exports. A single account can have multiple identifiers if it is referenced differently in different files.
 
 You can also select an account manually, which will be assigned to all transactions.
 
@@ -92,9 +64,11 @@ You can use a regex to only keep parts of the raw CSV value. Regexes can also be
 
 {1}, {2}, {3}&hellip; will output the values of capture groups.
 
+Another example is that if you want to add a prefix to a value, you can set the pattern to "prefix-{0}".
+
 ### All my transactions are positive - what happened?
 
-Some banks export one column with the account exported, a column for source and destination and finally a column for the amount that is positive or negative depending on whether the exported account is the source or destination. This creates a problem as Assetgrid will invert a transaction with a negative amount. This can be solved by making all transactions positive using the following regex: "[\\d,.]+" which will select everything expect the negative sign.
+Some banks export one column with the account exported, a column for source, a column for destination and finally a column for the amount that is positive or negative depending on whether the exported account is the source or destination. This creates a problem as Assetgrid will invert a transaction with a negative amount. This can be solved by making all transactions positive using the following regex: "[\\d,.]+" which will select everything except the negative sign.
 
 Example:
 |Exported account   |Source     |Destination    |Amount |
@@ -102,7 +76,7 @@ Example:
 |Account A          |Account B  |Account A      |200    |
 |Account A          |Account A  |Account C      |-200   |
 
-If you use the source, destination and amount columns. The transactions will be imported as follows, which is incorrect:
+If you use the source, destination and amount columns you will run into issues with the second transaction. Assetgrid will interpret it as -200 moves from A to C and convert that into 200 from C to A. This will create the following transactions.
 
 |Source     |Destination    |Amount |
 |---	    |---	        |---	|
@@ -111,4 +85,4 @@ If you use the source, destination and amount columns. The transactions will be 
 
 If you use the exported account column, you cannot also add the source or destination as it will lead to transactions with the same source and destination, which cannot be imported.
 
-The solution is to use the "[\\d,.]+" regex on the amount column, which will make it positive and thus the transactions will be correctly imported.
+The solution is to use the "[\\d,.]+" regex on the amount column, which will make all transactions positive and the transactions will be correctly imported.

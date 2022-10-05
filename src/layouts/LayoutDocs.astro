@@ -1,0 +1,114 @@
+---
+export interface Props {
+	title: string;
+	frontmatter?: { title: string }
+}
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title={Astro.props.frontmatter?.title ?? Astro.props.title}>
+	<div class="docs-parent">
+		<div class="sidebar">
+			<a href="/get-started">Get started</a>
+			<a href="/reference">Reference</a>
+			<ul>
+				<li><a href="/reference/transactions">Transactions</a></li>
+				<li><a href="/reference/accounts">Accounts</a></li>
+				<li><a href="/reference/import/csv">Importing</a></li>
+			</ul>
+		</div>
+		<main class="content">
+			<slot />
+		</main>
+	</div>
+</Layout>
+
+<style>
+	html {
+		min-height: 100%;
+	}
+	body {
+		color: #333;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	.sidebar {
+		width: min-content;
+		position: relative;
+		padding: 2rem;
+		box-sizing: border-box;
+	}
+	.sidebar::after {
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 2rem;
+		bottom: 2rem;
+		width: 2px;
+		border-radius: 1px;
+		background-color: rgb(134, 160, 178);
+		content: " ";
+	}
+	.sidebar a {
+		color: var(--color-link);
+		text-decoration: none;
+		display: block;
+		padding: 0 0.5rem;
+		max-width: 20rem;
+	}
+	.sidebar a:hover {
+		text-decoration: underline;
+	}
+	.sidebar ul {
+		margin: 0;
+	}
+	.docs-parent {
+		display: flex;
+		flex-grow: 1;
+		max-width: 80rem;
+		align-self: center;
+		width: 100%;
+	}
+	.docs-parent .content {
+		padding: 2rem;
+		overflow-x: scroll;
+		flex-grow: 1;
+	}
+
+	@media screen and (max-width: 50rem) {
+		.docs-parent {
+			flex-direction: column;
+		}
+		.sidebar {
+			max-width: none;
+			width: 100%;
+		}
+		.sidebar::after{
+			left: 1rem;
+			right: 1rem;
+			top: auto;
+			width: auto;
+			bottom: -1rem;
+			height: 2px;
+		}
+	}
+</style>
+<style is:global>
+	h1, h2, h3, h4 {
+		color: black;
+		font-weight: bold;
+	}
+	h1:not(:first-child) {
+		margin-top: 10rem;
+	}
+	h2 {
+		margin-top: 5rem;
+	}
+	h3 {
+		margin-top: 3rem;
+	}
+	h1 + h2, h2 + h3, h3 + h4 {
+		margin-top: 0;
+	}
+</style>
