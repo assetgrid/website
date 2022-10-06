@@ -45,17 +45,23 @@ import Layout from '../layouts/Layout.astro';
 		right: 0;
 		top: 2rem;
 		bottom: 2rem;
-		width: 2px;
+		width: 1px;
 		border-radius: 1px;
 		background-color: rgb(134, 160, 178);
 		content: " ";
 	}
+	.sidebar > a {
+		font-weight: bold;
+	}
 	.sidebar a {
-		color: var(--color-link);
 		text-decoration: none;
 		display: block;
 		padding: 0 0.5rem;
 		max-width: 20rem;
+		color: #333;
+	}
+	.sidebar li::marker {
+		color: var(--color-primary);
 	}
 	.sidebar a:hover {
 		text-decoration: underline;
@@ -90,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
 			top: auto;
 			width: auto;
 			bottom: -1rem;
-			height: 2px;
+			height: 1px;
 		}
 	}
 </style>
