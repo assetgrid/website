@@ -11,3 +11,6 @@ title: "Assetgrid | Reference documentation"
 
 #  CSV import
 <img src="/screenshots/assetgrid3.png" />
+
+#  Automations
+<img src="/screenshots/assetgrid4-automations.png" />
